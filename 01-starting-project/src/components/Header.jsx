@@ -5,6 +5,7 @@ function Header() {
   function getRandomInt(max) {
     return Math.round(Math.random() * max);
   }
+  console.log("rendering Header");
   return (
     <header>
       <img src={reactImg} alt="Stylized atom" />
