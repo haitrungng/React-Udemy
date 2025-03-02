@@ -66,6 +66,66 @@ output chỉ được render 1 lần và giữ nguyên value là Hello World
 
 mỗi lần set trong useState được gọi -> rendering lại trang được gọi
 
+## 2. Ref
+
+Dùng để đọc ttin trong input field
+
+- REF k làm cho component re-render
+- REF tạo ra các instant khác nhau cho mỗi component, make sure that các instant sẽ k bị lost mỗi lần re-render
+
+```js
+export default function Player() {
+  const playerName = useRef("unknown entity");
+  const [enteredName, setEnteredName] = useState(undefined);
+  function handleOnClick() {
+    setEnteredName(playerName.current.value);
+  }
+  return (
+    <section id="player">
+      <h2>Welcome {enteredName?.length ? enteredName : "Unknown entity"}</h2>
+      <p>
+        <input ref={playerName} type="text" />
+        <button onClick={handleOnClick}>Set Name</button>
+      </p>
+    </section>
+  );
+}
+```
+
+## 3. React Portals
+
+manipulate DOM tree
+
+```js
+import { createPortal } from "react-dom";
+
+export default function ResultModal({
+  ref,
+  remainingTime,
+  targetTime,
+  onReset,
+  score,
+}) {
+  return createPortal(
+    <dialog ref={ref} className="result-modal" onClose={onReset}>
+      {remainingTime <= 0 ? <h2>You lost</h2> : <h2>Your score: {score}%</h2>}
+      <p>
+        The target time was <strong>{targetTime}</strong> seconds
+      </p>
+      <p>
+        You stopped the timer with{" "}
+        <strong>{(remainingTime / 1000).toFixed(2)} seconds left</strong>
+      </p>
+      <form action="" method="dialog">
+        <button>Close</button>
+      </form>
+    </dialog>,
+    document.getElementById("modal")
+  );
+  //   modal trong file index.html
+}
+```
+
 # III. Tips
 
 ## 1. Forwarding props to wrapped elements
@@ -223,3 +283,36 @@ Cách hoạt động của React:
 💡 Hiệu ứng animation:
 
 Vì toàn bộ danh sách bị re-mount lại, tất cả các phần tử đều bị reset animation, khiến hiệu ứng có thể giật hoặc không mượt.
+
+## 8. Vanilla CSS are NOT scoped to components!!!
+
+but there's 1 solution: using CSS modules
+
+## 9. "Styled Components": third-party Package
+
+## 10. Set up tailwind 4.0
+
+trong tailwind 4.0, npx tailwindcss init bị bỏ -> k thể tạo file tailwind.config.js -> extension tailwind k chạy -> k thể auto complete
+
+=> SOLUTION
+
+![](imagesForMD/2025-02-28-13-42-34.png)
+
+# IV. Component & tailwind css
+
+## 1. dialog
+
+pop-up
+
+```js
+<dialog ref={ref} className="backdrop:bg-stone-900/90">
+  {children}
+  <form action="dialog">
+    // close btn
+    <button>{btnCaption}</button>
+  </form>
+</dialog>;
+
+// -------------- open dialog
+modelRef.current.showModal();
+```
