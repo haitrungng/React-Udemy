@@ -1,0 +1,46 @@
+{
+  "opinions": [
+    {
+      "id": 1742843860427,
+      "votes": 10,
+      "userName": "Cam Chau",
+      "title": "Báo cáo TN - temp",
+      "body": "wqeqweqweqweqwe"
+    },
+    {
+      "id": 1742842293839,
+      "votes": 4,
+      "userName": "Cam Chau",
+      "title": "Toi xinh dep",
+      "body": "kakakakakakak"
+    },
+    {
+      "id": 1742842279794,
+      "votes": 1,
+      "userName": "Cam Chau",
+      "title": "Toi xinh dep",
+      "body": "my nhan de nhat thien ha"
+    },
+    {
+      "id": 1742841579626,
+      "votes": -1,
+      "userName": "Hải Trung",
+      "title": "Báo cáo TN - temp",
+      "body": "1234342343423"
+    },
+    {
+      "id": 1,
+      "userName": "Maximilian Schwarzmüller",
+      "title": "Do yourself a favor and learn React!",
+      "body": "React is an amazing JavaScript library!\n\nDespite all it's shortcomings.",
+      "votes": 0
+    },
+    {
+      "id": 2,
+      "userName": "Maximilian Schwarzmüller",
+      "title": "React has more depth than you might first think!",
+      "body": "React is a great library to learn, but it's not just about the basics. Dive deeper!\nFor example with this course!",
+      "votes": 0
+    }
+  ]
+}

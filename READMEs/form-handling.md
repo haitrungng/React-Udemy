@@ -104,6 +104,15 @@ check [this file](../17-form-userInput/src/components/StateLogin.tsx)
 
 - thay vì sử dụng `onSubmit` prop, nhận vào 1 event as param và gọi `event.preventDefault()`
 - sử dụng props `action`
+
   - sẽ auto gọi `event.preventDefault()` behind the scene -> k làm page reload
   - nhận vào `FormData` là param thay vì event (các input field phải có name để nhận diện)
   - khi nhấn submit, form sẽ tự động bị reset (not reload)
+
+- sử dụng hook: useActionState ([check this](../18-form-action-API/src/components/NewOpinion.tsx))
+  - Nếu sử dụng `async func` cho `useActionState`, sử dụng `useFormStatus` hook để khiến submit btn disabled khi đang post data lên backend, tránh submit 2 lần ([check this](../18-form-action-API/src/components/SubmitBtn.tsx))
+  - Hoặc sử dụng `pending` của `useActionState` để disabled btn
+  - Tuy nhiên sẽ khiến UI bị lâu cập nhật
+    -> SOLUTIONS: `useOptimistic()`
+    - `useOptimistic` only gives you temp value, once the fetching done, it'll be back to the real value
+    - ex: [check this](../18-form-action-API/src/components/Opinion.tsx) using `useOptimistic`
