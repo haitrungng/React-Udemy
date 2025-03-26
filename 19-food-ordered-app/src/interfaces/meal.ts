@@ -5,3 +5,7 @@ export default interface Meal {
   description: string;
   image: string;
 }
+
+export type OrderType = Meal & {
+  quantity: number;
+};

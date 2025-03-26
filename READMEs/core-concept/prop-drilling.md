@@ -1,12 +1,13 @@
-# V. Prop Drilling (shopping-project)
+# Prop Drilling (shopping-project)
 
 Prop Drilling là một vấn đề trong React xảy ra khi một prop cần được truyền qua nhiều cấp của component tree, ngay cả khi một số component trung gian không sử dụng nó. Điều này làm cho code trở nên khó bảo trì và gây rối trong việc quản lý dữ liệu.
 
 -> Solution: Context API / Redux
 
-1. Context API
-   Thay vì truyền từng cấp, ta có thể sử dụng React Context API để cung cấp dữ liệu cho bất kỳ component nào trong cây component.
-   đặt tên folder: src/store
+## Context API (thường dùng với useReducer)
+
+Thay vì truyền từng cấp, ta có thể sử dụng React Context API để cung cấp dữ liệu cho bất kỳ component nào trong cây component.
+đặt tên folder: src/store
 
 ```js
 import { createContext } from "react";
@@ -36,7 +37,7 @@ import { CartContext } from "./store/shopping-cart-context.jsx";
 
 to consume the context, use hook useContext/use
 
-hooks dont allow to be in a block like if, for,... but use can!!!
+hooks dont allow to be in a block like if, for,... but `use` can!!!
 
 ```js
 import { useContext } from "react";
@@ -47,3 +48,12 @@ export default function Header() {
   // ...
 }
 ```
+
+- Dis-advantange
+  - In complex apps, using React Context can leed to deeply nested "Context Provider" components
+  - React Context is not optimized for high-frequency state changes (should be use for theme)
+
+## Redux
+
+- One Central Data (State) Store
+- Using reducer function to manipulate data

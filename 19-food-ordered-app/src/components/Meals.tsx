@@ -1,41 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 
 import MealInterface from "../interfaces/meal";
 import Meal from "./Meal";
+import { CartContext } from "../store/CartContext";
 
 const Meals = () => {
-  const [meals, setMeals] = React.useState<MealInterface[]>([]);
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [error, setError] = React.useState<{ message: string | null }>({
-    message: null,
-  });
-
-  useEffect(() => {
-    async function fetchMeals() {
-      setIsLoading(true);
-      try {
-        const res = await fetch("http://localhost:3000/meals");
-        const data = await res.json();
-
-        if (!res.ok) {
-          throw new Error("Error fetching meals");
-        }
-
-        setMeals(data);
-      } catch (err) {
-        setError({ message: "Error fetching meals" });
-      }
-      setIsLoading(false);
-    }
-    fetchMeals();
-  }, []);
+  const { meals, mealsError, mealsLoading } = useContext(CartContext);
 
   return (
     <div id="meals">
-      {isLoading && <h1>Loading...</h1>}
-      {error.message && <h1>{error.message}</h1>}
-      {meals.map((meal) => {
-        console.log(meal, meal.id);
+      {mealsLoading && <h1>Loading...</h1>}
+      {mealsError.message && <h1>{mealsError.message}</h1>}
+      {meals.map((meal: MealInterface) => {
         return (
           <Meal
             key={meal.id}
@@ -43,7 +19,7 @@ const Meals = () => {
             description={meal.description}
             image={meal.image}
             name={meal.name}
-            id=""
+            id={meal.id}
           />
         );
       })}
