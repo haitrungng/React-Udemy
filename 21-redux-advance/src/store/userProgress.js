@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { isOpenCart: false };
+const initialState = { isOpenCart: false, notification: null };
 
 const userProgressSlice = createSlice({
   name: "userProgress",
@@ -8,6 +8,16 @@ const userProgressSlice = createSlice({
   reducers: {
     toggleOpenCart(state) {
       state.isOpenCart = !state.isOpenCart;
+    },
+    showNotification(state, action) {
+      state.notification = {
+        status: action.payload.status,
+        title: action.payload.title,
+        message: action.payload.message,
+      };
+    },
+    hideNotification(state) {
+      state.notification = null;
     },
   },
 });

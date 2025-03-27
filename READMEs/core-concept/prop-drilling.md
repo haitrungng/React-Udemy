@@ -151,4 +151,31 @@ export default Counter;
 
 check the implementation at [here](../../20-redux/src/)
 
+## Asyncronous with redux
+
 !!! `REDUCER` must be a `pure, side-effect free, syncronous` function
+
+- solution
+
+1. use useEffect when ever a state change
+2. use thunk
+
+- Trong Redux, Redux Thunk là một middleware cho phép bạn:
+
+  - Dispatch action đồng bộ như bình thường.
+  - Hoặc dispatch một function (thunk) thay vì một object action — và trong function đó, bạn có thể thực hiện logic bất đồng bộ, rồi mới dispatch action sau khi có dữ liệu.
+
+```js
+const fetchUser = () => {
+  return async (dispatch) => {
+    dispatch({ type: "FETCH_USER_REQUEST" });
+    try {
+      const response = await fetch("/api/user");
+      const data = await response.json();
+      dispatch({ type: "FETCH_USER_SUCCESS", payload: data });
+    } catch (error) {
+      dispatch({ type: "FETCH_USER_FAILURE", error });
+    }
+  };
+};
+```

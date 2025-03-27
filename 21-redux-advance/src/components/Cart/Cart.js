@@ -5,10 +5,6 @@ import CartItem from "./CartItem";
 
 const Cart = (props) => {
   const cart = useSelector((state) => state.cart);
-  const isOpenCart = useSelector((state) => state.userProgress.isOpenCart);
-  console.log(isOpenCart);
-
-  if (!isOpenCart) return <></>;
 
   return (
     <Card className={classes.cart}>
@@ -16,7 +12,6 @@ const Cart = (props) => {
       <ul>
         {cart.items.map((item) => {
           const total = item.price * item.quantity;
-          console.log(item);
 
           return (
             <CartItem
